@@ -5,9 +5,9 @@
     .module('app.menu')
     .controller('Menu', Menu);
 
-  Menu.$inject = ['$location'];
+  Menu.$inject = ['$location', 'menuService'];
 
-  function Menu($location) {
+  function Menu($location, menuService) {
 
     var vm = this;
 
@@ -19,9 +19,17 @@
     activate();
 
     function activate() {
-      vm.ready = true;
-      console.info('Activated Menu View');
-      return vm.items;
+      return loadMenuItems().then(function () {
+        vm.ready = true;
+        console.info('Activated Menu View');
+      });
+    }
+
+    function loadMenuItems() {
+      return menuService.getMenuItems().then(function (data) {
+        vm.items = data;
+        return vm.items;
+      });
     }
 
     function menuClass(page) {
