@@ -1,0 +1,209 @@
+/* ===== == = === 48em (768px) === = == ===== */
+
+@media only screen and (max-width : 48em) {
+
+  .toggle-menu {
+    position: fixed;
+    top: @nav-mobile-menu-trigger-offset;
+    right: @nav-mobile-menu-trigger-offset;
+    z-index: 99997 !important;
+  }
+
+  .button {
+    cursor: pointer;
+    display : block;
+    width: auto;
+    padding: .75em;
+    /*background-size : 2em;*/
+    text-decoration: none;
+
+    background-repeat:repeat-x;
+    background-position :0;
+    background-image : -moz-linear-gradient(
+      90deg,
+      rgba(0,0,0,0) 0%,
+      rgba(0,0,0,0) 50%,
+      rgba(255,255,255,0.1) 50%,
+      rgba(255,255,255,0.3) 100%
+    );
+    background-image : -o-linear-gradient(
+      90deg,
+      rgba(0,0,0,0) 0%,
+      rgba(0,0,0,0) 50%,
+      rgba(255,255,255,0.1) 50%,
+      rgba(255,255,255,0.3) 100%
+    );
+    background-image : -webkit-linear-gradient(
+      90deg,
+      rgba(0,0,0,0) 0%,
+      rgba(0,0,0,0) 50%,
+      rgba(255,255,255,0.1) 50%,
+      rgba(255,255,255,0.3) 100%
+    );
+    border-radius: 5px;
+    border-bottom: 1px solid rgba(255,255,255,0.4);
+    box-shadow :0 -1px 1px rgba(0,0,0,0.2)inset,
+    0 1px 2px rgba(0,0,0,0.8)inset;
+    color:#fff;
+    text-shadow : 0px -1px 0 rgba(0,0,0,0.8);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+  }
+
+  .button {
+    background-color: rgba(33,33,33,1);/*normalcolor*/
+  }
+
+  .button:hover {
+    background-color: rgba(0,0,0,1);/*hovercolor*/
+  }
+
+  nav.menu {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+
+    height: 100%;
+    width: @nav-mobile-menu-width;
+
+    list-style: none;
+    background: @nav-bg-color;
+    z-index: 99996 !important;
+
+    overflow-x: hidden;
+    overflow-y: hidden;
+
+    h3 {
+      font-size: 1.5em;
+      padding: .75em;
+      text-align: center;
+    }
+
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      height: 100%;
+
+      li {
+        width: 100%;
+        span {
+          position: absolute;
+
+          width: 0;
+          height: 0;
+          border-top: 1em solid transparent;
+          border-bottom: 1em solid transparent;
+          border-left: 1em solid @nav-bg-color;
+          margin-top: .5em;
+        }
+        a {
+          text-align: center;
+          display: block;
+          line-height: 3em;
+          color: @nav-font-color;
+          cursor: hand;
+          text-decoration: none;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+
+        }
+        .active {
+          background-color: @nav-bg-highlight-color;
+          cursor: default;
+          font-weight: bold;
+          color: @nav-font-color;
+
+        }
+      }
+      :last-child:after {
+        .clear;
+      }
+    }
+  }
+
+}
+
+/* ===== == = === 312.500em (5000px) and 48.063em (769px) === = == ===== */
+
+@media only screen and (max-width : 312.500em) and (min-width: 48.063em) {
+
+  .toggle-menu, .button {
+    display: none;
+  }
+
+  nav.menu {
+    display: block;
+    position: fixed;
+    bottom: 3em;
+    left: 0;
+
+    height: 3em;
+    width: 100%;
+
+    background: @nav-bg-color;
+    z-index: 99998 !important;
+
+    background: rgba(0, 0, 0, 0.8);
+    border: solid 1px #777;
+    border-left: 0;
+    border-right: 0;
+
+    h3 {
+      float: left;
+      position: relative;
+      top: 50%;
+      -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+      transform: translateY(-50%);
+      //.vertical-center;
+      margin-left: 2em;
+    }
+
+    ul {
+      float: right;
+      list-style-type: none;
+      height: 100%;
+      margin-right: 2em;
+
+      li {
+        display: inline-block;
+
+        .vertical-center;
+
+        text-align: center;
+        width: 6em;
+
+
+        a {
+          display: block;
+          line-height: 3em;
+          cursor: pointer;
+          text-decoration: none;
+          &:hover {
+            background-color: @nav-bg-highlight-color;
+          }
+        }
+
+        .active {
+          background: @nav-bg-color;
+          background: rgba(0, 0, 0, 0.8);
+          cursor: default;
+          font-weight: bold;
+          color: @nav-bg-highlight-color;
+
+          &:hover {
+            color: @nav-bg-highlight-color;
+            background: @nav-bg-color;
+            background: rgba(0, 0, 0, 0.8);
+          }
+        }
+      }
+      :last-child:after {
+        .clear;
+      }
+    }
+  }
+}
