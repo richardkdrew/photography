@@ -9,12 +9,14 @@ FROM richardkdrew/nodejs
 
 MAINTAINER Richard Drew <richardkdrew@gmail.com>
 
-COPY ./* /app/
+ENV NODE_ENV "production"
+
+COPY . /app/
 
 WORKDIR "/app"
 
-RUN npm install
+RUN npm install --production
 
-EXPOSE 9000
+EXPOSE 8080
 
-CMD ["node", "server/app.js"]
+CMD ["npm", "start"]
