@@ -2,3 +2,9 @@ dependencies:
   override:
     - bower install
     - npm install
+
+deployment:
+  dockerhub:
+    branch: master
+    commands:
+      - $DOCKER_HUB_TRIGGER
