@@ -1,6 +1,6 @@
 general:
   artifacts:
-    - "dist/*"
+    - "dist"
 
 dependencies:
   override:
