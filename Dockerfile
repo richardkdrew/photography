@@ -9,7 +9,7 @@ FROM richardkdrew/nodejs
 
 MAINTAINER Richard Drew <richardkdrew@gmail.com>
 
-COPY ../dist/* /app/
+COPY ./* /app/
 
 WORKDIR "/app"
 
