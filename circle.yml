@@ -1,3 +1,7 @@
+machine:
+  services:
+    - docker
+
 general:
   artifacts:
     - "dist"
@@ -7,3 +11,11 @@ dependencies:
     - bower install
     - npm install
     - grunt build
+
+deployment:
+  hub:
+    branch: master
+    commands:
+      - docker build -t richardkdrew/photography ./dist/
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+      - docker push richardkdrew/photography
