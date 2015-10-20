@@ -6,3 +6,4 @@ dependencies:
   override:
     - bower install
     - npm install
+    - grunt build
