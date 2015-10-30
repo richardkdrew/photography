@@ -1,4 +1,4 @@
-/*'use strict';
+'use strict';
 
 describe('factory: picturesService', function () {
   var service, mockDataService, routeProvider;
@@ -6,16 +6,32 @@ describe('factory: picturesService', function () {
   beforeEach(function () {
     module('ngRoute');
 
+    module(function ($provide, $routeProvider) {
+      routeProvider = $routeProvider;
+      spyOn(routeProvider, 'when').andCallThrough();
+      spyOn(routeProvider, 'otherwise').andCallThrough();
+
+      mockDataService = {
+        getPictures     : function (tag) {}
+      };
+      $provide.value('dataService', mockDataService);
+    });
+
     module('app.pictures');
   });
 
+  beforeEach(function () {
+    inject(function($injector) {
+      service = $injector.get('picturesService');
+    })
+  });
 
   it('should be defined', function ()
   {
     expect(service).toBeDefined();
   });
 
-  describe('function: getPictures', function() {
+  /*describe('function: getPictures', function() {
 
     it('should be defined', function () {
       expect(service.getPictures()).toBeDefined();
@@ -24,7 +40,7 @@ describe('factory: picturesService', function () {
     it('should return a promise', function () {
       expect(service.getPictures().then).toBeDefined();
     });
-  });
+  });*/
 });
 
 /*
