@@ -41,7 +41,5 @@ describe('controller: menu', function () {
     it('should have called the menuService:getMenuItems method', function () {
       expect(mockMenuService.getMenuItems.called).toBeTruthy();
     });
-
   });
-
 });
