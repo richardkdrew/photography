@@ -17,7 +17,7 @@ describe('config block', function () {
 
   describe('config block tests', function () {
     it('should have called registered 1 route', function () {
-      // Otherwise internally calls when. So, call count of when has to be 2
+      // Otherwise calls 'when' internally. So, call count of 'when' has to be 2
       expect(routeProvider.when.callCount).toBe(2);
     });
 
