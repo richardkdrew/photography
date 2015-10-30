@@ -22,7 +22,15 @@
     function getPictures(tag) {
       var deferred = $q.defer();
 
-      $http.get('api/v1/pictures')
+      var queryParams = {
+        params: {
+          tags    : tag,
+          offset  : 0,
+          limit   : 25
+        }
+      };
+
+      $http.get('api/v1/pictures', queryParams)
         .success(getPicturesComplete)
         .error(getPicturesFailed);
 
