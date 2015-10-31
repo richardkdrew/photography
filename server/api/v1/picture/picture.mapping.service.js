@@ -75,8 +75,9 @@ function pictureMappingService() {
     function mapResultMetadata(payload) {
       var mappedResult = {};
       mappedResult.status = payload.stat;
-      mappedResult.code = payload.code;
-      mappedResult.message = payload.message;
+
+      if(payload.code) mappedResult.code = payload.code;
+      if(payload.message) mappedResult.message = payload.message;
 
       return mappedResult;
     }
