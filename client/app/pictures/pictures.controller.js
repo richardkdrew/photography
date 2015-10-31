@@ -17,7 +17,6 @@
     vm.loadingMore = false;
     vm.ready = false;
     vm.tag = '';
-    vm.currentPicture = null;
 
     activate();
 

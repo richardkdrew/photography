@@ -23,6 +23,8 @@ module.exports = function(config) {
       'client/app/**/*.js',
       'client/app/**/*.html',
 
+      'test/mockData.js',
+
       // all specs ... comment out during early test training
       'client/app/**/*.spec.js'
     ],
@@ -43,7 +45,7 @@ module.exports = function(config) {
     exclude: [],
 
     // web server port
-    port: 8080,
+    port: 8085,
 
     // level of logging
     // possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
