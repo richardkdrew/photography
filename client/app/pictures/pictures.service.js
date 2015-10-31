@@ -12,7 +12,6 @@
     var self = this;
 
     // Initialise some local params for paging and pictures
-    self.pictures = [];
     self.paging = {};
     self.tag = '';
 

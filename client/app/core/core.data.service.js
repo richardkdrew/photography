@@ -9,10 +9,6 @@
 
   function dataService($q, $http) {
 
-    var self = this;
-    self.pictures = [];
-    self.tags = [];
-
     var service = {
       getPictures: getPictures
     };
