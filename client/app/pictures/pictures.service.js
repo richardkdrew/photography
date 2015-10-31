@@ -5,32 +5,37 @@
     .module('app.pictures')
     .factory('picturesService', picturesService);
 
-  picturesService.$inject = ['$q', 'dataService'];
+  picturesService.$inject = ['$q', 'dataService', 'detectionService'];
 
-  function picturesService($q, dataService) {
+  function picturesService($q, dataService, detectionService) {
 
     var self = this;
 
     // Initialise some local params for paging and pictures
+    self.pictures = [];
     self.paging = {};
     self.tag = '';
 
     var service = {
-      getPictures : getPictures,
-      hasMore     : hasMore,
-      hasSome     : hasSome,
-      getTag      : getTag
+      getPictures: getPictures,
+      hasMore: hasMore,
+      hasSome: hasSome,
+      getTag: getTag
     };
     return service;
 
     function getPictures(tag) {
       var deferred = $q.defer();
 
-      dataService.getPictures(tag).then(getPicturesComplete, getPicturesFailed);
+      var offset = getPagingOffset();
+      var limit = getPagingLimit();
+
+      dataService.getPictures(tag, offset, limit).then(getPicturesComplete, getPicturesFailed);
 
       function getPicturesComplete(data) {
         self.paging = data.meta.paging;
-        deferred.resolve(data.pictures);
+        setPictures(tag, data.pictures);
+        deferred.resolve(self.pictures);
       }
 
       function getPicturesFailed(data, code) {
@@ -51,6 +56,31 @@
 
     function getTag() {
       return self.tag;
+    }
+
+    function setPictures(tag, pictures) {
+      // if the tags are different reset the pictures collection
+      if (tag !== self.tag) {
+        self.pictures = [];
+      }
+
+      self.pictures = self.pictures.concat(pictures);
+    }
+
+    function getPagingLimit() {
+      var perPage = 52;
+      if (detectionService.isMobile()) {
+        perPage = 16;
+      }
+      return perPage;
+    }
+
+    function getPagingOffset() {
+      var offset = 0;
+
+      if (self.paging.offset && self.paging.limit) offset = self.paging.offset + self.paging.limit;
+
+      return offset;
     }
   }
 })();

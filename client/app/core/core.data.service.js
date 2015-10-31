@@ -15,16 +15,18 @@
 
     return service;
 
-    function getPictures(tag) {
+    function getPictures(tag, offset, limit) {
       var deferred = $q.defer();
 
       var queryParams = {
         params: {
           tags    : tag,
-          offset  : 0,
-          limit   : 25
+          offset  : offset,
+          limit   : limit
         }
       };
+
+      console.log(queryParams);
 
       $http.get('api/v1/pictures', queryParams)
         .success(getPicturesComplete)

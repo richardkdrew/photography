@@ -36,7 +36,8 @@
 
       return picturesService.getPictures(vm.tag).then(function (data) {
 
-        setPictures(data);
+        //setPictures(data);
+        vm.pictures = data;
         vm.hasMore = picturesService.hasMore();
         vm.hasSome = picturesService.hasSome();
         vm.tag = picturesService.getTag();
@@ -45,13 +46,13 @@
       });
     }
 
-    function setPictures(pictures) {
+    /*function setPictures(pictures) {
       // if the tags are different reset the pictures collection
       if(vm.tag !== picturesService.tag) {
         vm.pictures = [];
       }
 
       vm.pictures = vm.pictures.concat(pictures);
-    }
+    }*/
   }
 })();
