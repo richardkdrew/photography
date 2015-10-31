@@ -35,8 +35,6 @@
       vm.tag = $routeParams.tag;
 
       return picturesService.getPictures(vm.tag).then(function (data) {
-
-        //setPictures(data);
         vm.pictures = data;
         vm.hasMore = picturesService.hasMore();
         vm.hasSome = picturesService.hasSome();
@@ -45,14 +43,5 @@
         return vm.pictures;
       });
     }
-
-    /*function setPictures(pictures) {
-      // if the tags are different reset the pictures collection
-      if(vm.tag !== picturesService.tag) {
-        vm.pictures = [];
-      }
-
-      vm.pictures = vm.pictures.concat(pictures);
-    }*/
   }
 })();

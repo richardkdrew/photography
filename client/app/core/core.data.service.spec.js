@@ -32,12 +32,12 @@ describe('factory: dataService', function () {
       beforeEach(inject(function (_$httpBackend_) {
         $httpBackend = _$httpBackend_;
 
-        $httpBackend.whenGET('api/v1/pictures?limit=25&offset=0')
+        $httpBackend.whenGET('api/v1/pictures?limit=52&offset=0')
           .respond(mockData.getMockApiResponse());
       }));
 
       it('should return 3 pictures', function () {
-        service.getPictures().then(function(data) {
+        service.getPictures(null, 0, 52).then(function(data) {
           expect(data.pictures.length).toEqual(3);
         });
         $httpBackend.flush();
@@ -50,12 +50,12 @@ describe('factory: dataService', function () {
       beforeEach(inject(function (_$httpBackend_) {
         $httpBackend = _$httpBackend_;
 
-        $httpBackend.whenGET('api/v1/pictures?limit=25&offset=0')
+        $httpBackend.whenGET('api/v1/pictures?limit=52&offset=0')
           .respond(500, 'Internal Server Error');
       }));
 
       it('should handle errors', function () {
-        service.getPictures().then(function(error) {
+        service.getPictures(null, 0, 52).then(function(error) {
           expect(error).toEqual(500);
         });
         $httpBackend.flush();

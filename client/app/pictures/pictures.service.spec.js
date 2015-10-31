@@ -1,7 +1,7 @@
 'use strict';
 
 describe('factory: picturesService', function () {
-  var service, mockDataService, routeProvider;
+  var service, mockDataService, mockDetectionService, routeProvider;
 
   beforeEach(function () {
     module('ngRoute');
@@ -22,7 +22,16 @@ describe('factory: picturesService', function () {
         return deferred.promise;
       });
 
+      mockDetectionService = {
+        isMobile: function () {}
+      };
+
+      sinon.stub(mockDetectionService, 'isMobile', function() {
+        return false;
+      });
+
       $provide.value('dataService', mockDataService);
+      $provide.value('detectionService', mockDetectionService);
     });
 
     module('app.pictures');

@@ -18,17 +18,13 @@
     function getPictures(tag, offset, limit) {
       var deferred = $q.defer();
 
-      var queryParams = {
+      $http.get('api/v1/pictures', {
         params: {
-          tags    : tag,
-          offset  : offset,
-          limit   : limit
+          tags: tag,
+          offset: offset,
+          limit: limit
         }
-      };
-
-      console.log(queryParams);
-
-      $http.get('api/v1/pictures', queryParams)
+      })
         .success(getPicturesComplete)
         .error(getPicturesFailed);
 
