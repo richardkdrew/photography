@@ -19,13 +19,6 @@ describe('factory: dataService', function () {
 
   describe('function: getPictures', function() {
 
-    beforeEach(inject(function (_$httpBackend_) {
-      $httpBackend = _$httpBackend_;
-
-      $httpBackend.whenGET('api/v1/pictures?limit=25&offset=0')
-        .respond(mockData.getMockApiResponse());
-    }));
-
     it('should be defined', function () {
       expect(service.getPictures()).toBeDefined();
     });
@@ -34,11 +27,40 @@ describe('factory: dataService', function () {
       expect(service.getPictures().then).toBeDefined();
     });
 
-    it('should return 3 pictures', function () {
-      service.getPictures().then(function(data) {
-        expect(data.pictures.length).toEqual(3);
+    describe('successful api call', function () {
+
+      beforeEach(inject(function (_$httpBackend_) {
+        $httpBackend = _$httpBackend_;
+
+        $httpBackend.whenGET('api/v1/pictures?limit=25&offset=0')
+          .respond(mockData.getMockApiResponse());
+      }));
+
+      it('should return 3 pictures', function () {
+        service.getPictures().then(function(data) {
+          expect(data.pictures.length).toEqual(3);
+        });
+        $httpBackend.flush();
       });
-      $httpBackend.flush();
+
+    });
+
+    describe('unsuccessful api call', function () {
+
+      beforeEach(inject(function (_$httpBackend_) {
+        $httpBackend = _$httpBackend_;
+
+        $httpBackend.whenGET('api/v1/pictures?limit=25&offset=0')
+          .respond(500, 'Internal Server Error');
+      }));
+
+      it('should handle errors', function () {
+        service.getPictures().then(function(error) {
+          expect(error).toEqual(500);
+        });
+        $httpBackend.flush();
+      });
+
     });
   });
 });
