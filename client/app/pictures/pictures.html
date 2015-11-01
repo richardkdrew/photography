@@ -2,10 +2,14 @@
   <div ng-show="vm.ready" ng-switch-when='true' class="pictures-container">
     <div class="grid">
       <div ng-repeat='picture in vm.pictures | orderBy : id' class="item">
-          <picture-loader w="picture.width" h="picture.height" desc="picture.title" url="picture.url"></picture-loader>
+        <picture-loader w="picture.small.width" h="picture.small.height" desc="picture.title" url="picture.small.url"></picture-loader>
       </div>
     </div>
     <div class="clear-fix"></div>
+    <div ng-switch="vm.loadingMore" ng-if="vm.hasMore" class="load-more-container">
+      <div ng-switch-when='true'><img ng-src="/assets/images/spinner.gif" alt="Loading more pictures..."/></div>
+      <div ng-switch-default class="load-more"><a ng-click='vm.loadMore()'>Load more pictures</a></div>
+    </div>
   </div>
 
   <div ng-show="vm.ready" ng-switch-default class="no-pictures-container">

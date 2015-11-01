@@ -35,31 +35,24 @@ describe('controller: pictures', function () {
 
       sinon.stub(mockPicturesService, 'getPictures', function () {
         var deferred = $q.defer();
-        deferred.resolve([{
-          "id": "16414316734",
-          "title": "5D3_7127 - Version 2",
-          "url": "https://farm9.staticflickr.com/8772/16414316734_25428bc7d7.jpg",
-          "width": 500,
-          "height": 333,
-          "tags": "wedding bentley"
-        },
-          {
-            "id": "16850528669",
-            "title": "5D3_7114 - Version 2",
-            "url": "https://farm9.staticflickr.com/8808/16850528669_b01e0b57a8.jpg",
-            "width": 500,
-            "height": 333,
-            "tags": "wedding bentley"
-          },
-          {
-            "id": "16829340237",
-            "title": "5D3_7111 - Version 2",
-            "url": "https://farm9.staticflickr.com/8761/16829340237_b41b271931.jpg",
-            "width": 500,
-            "height": 333,
-            "tags": "wedding bentley"
-          }]);
+        deferred.resolve(mockData.getMockPictures());
         return deferred.promise;
+      });
+
+      /*spyOn(mockPicturesService, 'hasSome').andCallFake(function () {
+        return true;
+      });*/
+
+      sinon.stub(mockPicturesService, 'hasSome', function () {
+        return true;
+      });
+
+      sinon.stub(mockPicturesService, 'hasMore', function () {
+        return true;
+      });
+
+      sinon.stub(mockPicturesService, 'getTag', function () {
+        return 'testTag';
       });
 
       // Set up the controller under test
@@ -75,14 +68,38 @@ describe('controller: pictures', function () {
     expect(controller).toBeDefined();
   });
 
+  describe('function: loadMore', function () {
+
+    it('should be defined', function () {
+      expect(controller.loadMore()).toBeDefined();
+    });
+
+  });
+
   describe('after activate function is called', function () {
+
+    it('should have called the picturesService:getPictures method', function () {
+      expect(mockPicturesService.getPictures.called).toBeTruthy();
+    });
 
     it('should have 3 pictures loaded', function () {
       expect(controller.pictures.length).toEqual(3);
     });
 
-    it('should have called the picturesService:getPictures method', function () {
-      expect(mockPicturesService.getPictures.called).toBeTruthy();
+    it('should be ready', function () {
+      expect(controller.ready).toEqual(true);
+    });
+
+    it('should have some pictures', function () {
+      expect(controller.hasSome).toEqual(true);
+    });
+
+    it('should have more pictures to retrieve', function () {
+      expect(controller.hasMore).toEqual(true);
+    });
+
+    it('should have a tag', function () {
+      expect(controller.tag).toEqual('testTag');
     });
   });
 });

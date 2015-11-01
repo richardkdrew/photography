@@ -17,7 +17,6 @@
     vm.loadingMore = false;
     vm.ready = false;
     vm.tag = '';
-    vm.currentPicture = null;
 
     activate();
 
@@ -36,7 +35,6 @@
       vm.tag = $routeParams.tag;
 
       return picturesService.getPictures(vm.tag).then(function (data) {
-
         setPictures(data);
         vm.hasMore = picturesService.hasMore();
         vm.hasSome = picturesService.hasSome();
@@ -48,7 +46,7 @@
 
     function setPictures(pictures) {
       // if the tags are different reset the pictures collection
-      if(vm.tag !== picturesService.tag) {
+      if (vm.tag !== picturesService.tag) {
         vm.pictures = [];
       }
 

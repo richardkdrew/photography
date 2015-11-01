@@ -5,32 +5,35 @@
     .module('app.pictures')
     .factory('picturesService', picturesService);
 
-  picturesService.$inject = ['$q', 'dataService'];
+  picturesService.$inject = ['$q', 'dataService', 'detectionService'];
 
-  function picturesService($q, dataService) {
+  function picturesService($q, dataService, detectionService) {
 
     var self = this;
 
     // Initialise some local params for paging and pictures
-    self.pictures = [];
     self.paging = {};
     self.tag = '';
 
     var service = {
-      getPictures : getPictures,
-      hasMore     : hasMore,
-      hasSome     : hasSome,
-      getTag      : getTag
+      getPictures: getPictures,
+      hasMore: hasMore,
+      hasSome: hasSome,
+      getTag: getTag
     };
     return service;
 
     function getPictures(tag) {
       var deferred = $q.defer();
 
-      dataService.getPictures(tag).then(getPicturesComplete, getPicturesFailed);
+      var offset = getPagingOffset();
+      var limit = getPagingLimit();
+
+      dataService.getPictures(tag, offset, limit).then(getPicturesComplete, getPicturesFailed);
 
       function getPicturesComplete(data) {
         self.paging = data.meta.paging;
+        self.tag = tag;
         deferred.resolve(data.pictures);
       }
 
@@ -52,6 +55,24 @@
 
     function getTag() {
       return self.tag;
+    }
+
+    function getPagingLimit() {
+      var perPage = 52;
+      if (detectionService.isMobile()) {
+        perPage = 16;
+      }
+      return perPage;
+    }
+
+    function getPagingOffset() {
+      var offset = 0;
+
+      if (self.paging.offset !== undefined && self.paging.limit !== undefined) {
+        offset = (self.paging.offset + self.paging.limit);
+      }
+
+      return offset;
     }
   }
 })();
