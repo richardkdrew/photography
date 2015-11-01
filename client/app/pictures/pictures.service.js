@@ -12,9 +12,8 @@
     var self = this;
 
     // Initialise some local params for paging and pictures
-    //self.pictures = [];
     self.paging = {};
-    self.tag = undefined;
+    self.tag = '';
 
     var service = {
       getPictures: getPictures,
@@ -34,14 +33,8 @@
 
       function getPicturesComplete(data) {
         self.paging = data.meta.paging;
-        //setPictures(tag, data.pictures);
-
-        console.log('Offset:', self.paging.offset);
-        console.log('Limit:', self.paging.limit);
-        console.log('Total:', self.paging.total);
-
+        self.tag = tag;
         deferred.resolve(data.pictures);
-        //deferred.resolve(self.pictures);
       }
 
       function getPicturesFailed(data, code) {
@@ -64,15 +57,6 @@
       return self.tag;
     }
 
-    /*function setPictures(tag, pictures) {
-      // if the tags are different reset the pictures collection
-      if (tag !== self.tag) {
-        self.pictures = [];
-      }
-
-      self.pictures = self.pictures.concat(pictures);
-    }*/
-
     function getPagingLimit() {
       var perPage = 52;
       if (detectionService.isMobile()) {
@@ -84,13 +68,8 @@
     function getPagingOffset() {
       var offset = 0;
 
-      console.log('paging.offset:', self.paging.offset);
-      console.log('paging.limit:', self.paging.limit);
-
       if (self.paging.offset !== undefined && self.paging.limit !== undefined) {
-        console.log('setting offset');
-        offset = Number(self.paging.offset) + Number(self.paging.limit);
-        console.log('new offset', offset);
+        offset = (self.paging.offset + self.paging.limit);
       }
 
       return offset;

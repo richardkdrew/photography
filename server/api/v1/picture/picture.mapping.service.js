@@ -84,16 +84,9 @@ function pictureMappingService() {
     function getPagingMetadata(payload) {
       var paging = {};
 
-      //console.log('offset before calc:', paging.offset);
-
       paging.limit = Number(payload.photos.perpage);
       paging.offset = Number((payload.photos.page * paging.limit) - paging.limit);
       paging.total = Number(payload.photos.total) || 0;
-
-      /*console.log('offset after calc:', paging.offset);
-      console.log('limit:', paging.limit);
-      console.log('per page:', payload.photos.perpage);
-      console.log('page:', payload.photos.page);*/
 
       return paging;
     }
