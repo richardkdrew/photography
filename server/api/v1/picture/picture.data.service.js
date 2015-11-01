@@ -23,9 +23,11 @@ function pictureDataService() {
   function getMockFlickrApiResponse(offset, limit) {
     var total = 52;
     var pages = total / limit;
+    var page = offset / limit + 1;
+
     return {
       "photos": {
-        "page": offset, "pages": pages, "perpage": limit, "total": total,
+        "page": page, "pages": pages, "perpage": limit, "total": total,
         "photo": getMockPictures(offset, limit)
       }, "stat": 'ok'
     };
@@ -1125,6 +1127,15 @@ function pictureDataService() {
         "width_o": '2450'
       }];
 
-    return pictures.slice(offset, limit);
+    var start = offset;
+    var length = Number(offset) + Number(limit);
+
+    /*console.log('offset: ', offset);
+    console.log('limit: ', limit);
+    console.log('pictures.length: ', pictures.length);
+    console.log('start: ', start);
+    console.log('length: ', length);*/
+
+    return pictures.slice(start, length);
   }
 }

@@ -29,6 +29,7 @@
         .error(getPicturesFailed);
 
       function getPicturesComplete(data) {
+        console.log('pictures.length: ', data.pictures.length);
         deferred.resolve(data);
       }
 

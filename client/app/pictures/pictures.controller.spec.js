@@ -47,6 +47,14 @@ describe('controller: pictures', function () {
         return true;
       });
 
+      sinon.stub(mockPicturesService, 'hasMore', function () {
+        return true;
+      });
+
+      sinon.stub(mockPicturesService, 'getTag', function () {
+        return 'testTag';
+      });
+
       // Set up the controller under test
       controller = $controller('Pictures', {
         $scope: scope, $routeParams: {},
@@ -82,8 +90,16 @@ describe('controller: pictures', function () {
       expect(controller.ready).toEqual(true);
     });
 
-    it('should have set the haveSome flag', function () {
+    it('should have some pictures', function () {
       expect(controller.hasSome).toEqual(true);
+    });
+
+    it('should have more pictures to retrieve', function () {
+      expect(controller.hasMore).toEqual(true);
+    });
+
+    it('should have a tag', function () {
+      expect(controller.tag).toEqual('testTag');
     });
   });
 });

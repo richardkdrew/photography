@@ -17,8 +17,6 @@ function pictureService() {
   function getPictures(req) {
     var deferred = q.defer();
 
-    console.log('in pictures service');
-
     var defaultSettings = {
       defaults: {
         offset: 0,
@@ -41,7 +39,6 @@ function pictureService() {
 
     function loadPictureDataComplete(data) {
       return pictureMappingService.mapPicturesResponse(data).then(function (result) {
-        console.log('mapped picture data');
         deferred.resolve(result);
       });
     }
