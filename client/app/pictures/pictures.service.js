@@ -14,6 +14,7 @@
     // Initialise some local params for paging and pictures
     self.paging = {};
     self.tag = '';
+    self.currentPicture = undefined;
 
     var service = {
       getPictures: getPictures,

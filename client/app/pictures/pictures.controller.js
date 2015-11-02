@@ -5,13 +5,14 @@
     .module('app.pictures')
     .controller('Pictures', Pictures);
 
-  Pictures.$inject = ['$routeParams', 'picturesService'];
+  Pictures.$inject = ['$routeParams', '$location', 'picturesService'];
 
-  function Pictures($routeParams, picturesService) {
+  function Pictures($routeParams, $location, picturesService) {
 
     var vm = this;
     vm.pictures = [];
     vm.loadMore = loadMore;
+    vm.viewPictureDetail = viewPictureDetail;
     vm.hasMore = false;
     vm.hasSome = false;
     vm.loadingMore = false;
@@ -51,6 +52,11 @@
       }
 
       vm.pictures = vm.pictures.concat(pictures);
+    }
+
+    function viewPictureDetail(picture) {
+      picturesService.currentPicture = picture;
+      $location.path('picture-detail');
     }
   }
 })();
