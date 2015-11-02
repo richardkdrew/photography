@@ -16,11 +16,12 @@
     "lodash": "^3.2.0",
     "method-override": "^1.0.2",
     "morgan": "^1.0.1",
+    "newrelic": "^1.23.0",
+    "q": "^2.0.3",
     "request": "^2.54.0",
     "serve-favicon": "^2.0.1",
     "should": "^7.0.1",
-    "supertest": "^1.0.1",
-    "q": "^2.0.3"
+    "supertest": "^1.0.1"
   },
   "devDependencies": {
     "connect-livereload": "^0.5.3",
