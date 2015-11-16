@@ -12,11 +12,13 @@
     var vm = this;
     vm.pictures = [];
     vm.loadMore = loadMore;
-    vm.viewPictureDetail = viewPictureDetail;
+    vm.viewDetail = viewDetail;
+    vm.isMobile = false;
     vm.hasMore = false;
     vm.hasSome = false;
     vm.loadingMore = false;
     vm.ready = false;
+
     vm.tag = '';
 
     activate();
@@ -24,6 +26,7 @@
     function activate() {
       return loadMore(0).then(function () {
         vm.ready = true;
+        vm.isMobile = picturesService.isMobile();
         console.info('Activated Pictures View');
       });
     }
@@ -50,11 +53,10 @@
       if (vm.tag !== picturesService.tag) {
         vm.pictures = [];
       }
-
       vm.pictures = vm.pictures.concat(pictures);
     }
 
-    function viewPictureDetail(picture) {
+    function viewDetail(picture) {
       picturesService.currentPicture = picture;
       navigationService.navigate('picture-detail');
     }

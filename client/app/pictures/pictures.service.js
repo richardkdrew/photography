@@ -17,10 +17,11 @@
     self.currentPicture = undefined;
 
     var service = {
-      getPictures: getPictures,
-      hasMore: hasMore,
-      hasSome: hasSome,
-      getTag: getTag
+      getPictures : getPictures,
+      hasMore     : hasMore,
+      hasSome     : hasSome,
+      isMobile   : isMobile,
+      getTag      : getTag
     };
     return service;
 
@@ -56,6 +57,10 @@
 
     function hasSome() {
       return self.paging.total > 0;
+    }
+
+    function isMobile() {
+      return detectionService.isMobile();
     }
 
     function getTag() {
