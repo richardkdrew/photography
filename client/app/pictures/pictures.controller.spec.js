@@ -29,6 +29,8 @@ describe('controller: pictures', function () {
         },
         hasMore: function () {
         },
+        isMobile: function () {
+        },
         getTag: function () {
         }
       };
@@ -40,8 +42,8 @@ describe('controller: pictures', function () {
       });
 
       /*spyOn(mockPicturesService, 'hasSome').andCallFake(function () {
-        return true;
-      });*/
+       return true;
+       });*/
 
       sinon.stub(mockPicturesService, 'hasSome', function () {
         return true;
@@ -49,6 +51,10 @@ describe('controller: pictures', function () {
 
       sinon.stub(mockPicturesService, 'hasMore', function () {
         return true;
+      });
+
+      sinon.stub(mockPicturesService, 'isMobile', function () {
+        return false;
       });
 
       sinon.stub(mockPicturesService, 'getTag', function () {
