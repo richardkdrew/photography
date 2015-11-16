@@ -1,7 +1,7 @@
 'use strict';
 
 describe('controller: pictures', function () {
-  var controller, mockPicturesService = {}, scope, routeProvider;
+  var controller, mockPicturesService = {}, mockNavigationService = {}, scope, routeProvider;
 
   beforeEach(function () {
     module('ngRoute');
@@ -55,10 +55,17 @@ describe('controller: pictures', function () {
         return 'testTag';
       });
 
+      // Set up the mock pictures service
+      mockNavigationService = {
+        navigate: function () {
+        }
+      };
+
       // Set up the controller under test
       controller = $controller('Pictures', {
         $scope: scope, $routeParams: {},
-        picturesService: mockPicturesService
+        picturesService: mockPicturesService,
+        navigationService: mockNavigationService
       });
       $rootScope.$apply();
     });
