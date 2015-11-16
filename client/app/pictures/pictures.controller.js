@@ -5,9 +5,9 @@
     .module('app.pictures')
     .controller('Pictures', Pictures);
 
-  Pictures.$inject = ['$routeParams', '$location', 'picturesService'];
+  Pictures.$inject = ['$routeParams', 'picturesService', 'navigationService'];
 
-  function Pictures($routeParams, $location, picturesService) {
+  function Pictures($routeParams, picturesService, navigationService) {
 
     var vm = this;
     vm.pictures = [];
@@ -22,20 +22,20 @@
     activate();
 
     function activate() {
-      return loadMore().then(function () {
+      return loadMore(0).then(function () {
         vm.ready = true;
         console.info('Activated Pictures View');
       });
     }
 
-    function loadMore() {
+    function loadMore(offset) {
       if (vm.loadingMore) {return;}
       vm.loadingMore = true;
 
       // Grab the tag from the url
       vm.tag = $routeParams.tag;
 
-      return picturesService.getPictures(vm.tag).then(function (data) {
+      return picturesService.getPictures(vm.tag, offset).then(function (data) {
         setPictures(data);
         vm.hasMore = picturesService.hasMore();
         vm.hasSome = picturesService.hasSome();
@@ -56,7 +56,7 @@
 
     function viewPictureDetail(picture) {
       picturesService.currentPicture = picture;
-      $location.path('picture-detail');
+      navigationService.navigate('picture-detail');
     }
   }
 })();

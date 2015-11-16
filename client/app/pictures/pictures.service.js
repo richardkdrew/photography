@@ -24,13 +24,17 @@
     };
     return service;
 
-    function getPictures(tag) {
+    function getPictures(tag, offset) {
       var deferred = $q.defer();
 
-      var offset = getPagingOffset();
+      var pagingOffset = offset;
+
+      if(offset === undefined) {
+        pagingOffset = getPagingOffset();
+      }
       var limit = getPagingLimit();
 
-      dataService.getPictures(tag, offset, limit).then(getPicturesComplete, getPicturesFailed);
+      dataService.getPictures(tag, pagingOffset, limit).then(getPicturesComplete, getPicturesFailed);
 
       function getPicturesComplete(data) {
         self.paging = data.meta.paging;
@@ -72,7 +76,6 @@
       if (self.paging.offset !== undefined && self.paging.limit !== undefined) {
         offset = (self.paging.offset + self.paging.limit);
       }
-
       return offset;
     }
   }

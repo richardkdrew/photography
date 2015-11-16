@@ -16,7 +16,7 @@
     activate();
 
     function activate() {
-        vm.picture = picturesService.currentPicture;
+      vm.picture = picturesService.currentPicture;
         vm.ready = true;
         console.info('Activated Picture Detail View');
     }

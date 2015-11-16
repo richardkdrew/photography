@@ -11,7 +11,8 @@
       .when('/picture-detail', {
         templateUrl: 'app/picture-detail/picture-detail.html',
         controller: 'PictureDetail',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        animation: 'picture-detail-view'
       });
   }
 })();

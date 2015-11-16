@@ -11,7 +11,8 @@
       .when('/pictures', {
         templateUrl: 'app/pictures/pictures.html',
         controller: 'Pictures',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        animation: 'pictures-view'
       }).otherwise('/pictures');
   }
 })();
