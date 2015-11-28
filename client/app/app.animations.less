@@ -1,5 +1,89 @@
 @media only screen and (max-width : 48em) {
 
+
+  // View Animations
+
+  .ng-enter, .ng-leave {
+    animation-duration: 0.5s;
+    animation-fill-mode: both;
+    -webkit-animation-duration: 0.5s;
+    -webkit-animation-fill-mode: both;
+  }
+
+  /*.ng-enter.ng-enter-active {
+    top: 0;
+  }*/
+
+  /*.ng-leave.ng-leave-active {
+    left: 0;
+  }*/
+
+  .pictures-view .ng-enter {
+    position: absolute;
+    animation-name: slideInFromLeft;
+    -webkit-animation-name: slideInFromLeft;
+  }
+
+  .picture-detail-view .ng-leave {
+    position: absolute;
+    animation-name: slideOutToLeft;
+    -webkit-animation-name: slideOutToLeft;
+  }
+
+  .picture-detail-view .ng-enter {
+    position: absolute;
+    animation-name: slideInFromRight;
+    -webkit-animation-name: slideInFromRight;
+  }
+
+  .pictures-view .ng-leave {
+    position: absolute;
+    animation-name: slideOutToRight;
+    -webkit-animation-name: slideOutToRight;
+  }
+
+  @keyframes slideInFromLeft {
+    from  { transform: translateX(-100%); }
+    to    { transform: translateX(0%); }
+  }
+
+  @-webkit-keyframes slideInFromLeft {
+    from  { -webkit-transform: translateX(-100%); }
+    to    { -webkit-transform: translateX(0%); }
+  }
+
+  @keyframes slideInFromRight {
+    from  { transform: translateX(100%); }
+    to    { transform: translateX(0%); }
+  }
+
+  @-webkit-keyframes slideInFromRight {
+    from  { -webkit-transform: translateX(100%); }
+    to    { -webkit-transform: translateX(0%); }
+  }
+
+  @keyframes slideOutToRight {
+    from  { transform: translateX(0%); }
+    to    { transform: translateX(100%); }
+  }
+
+  @-webkit-keyframes slideOutToRight {
+    from  { -webkit-transform: translateX(0%); }
+    to    { -webkit-transform: translateX(100%); }
+  }
+
+  @keyframes slideOutToLeft {
+    from  { transform: translateX(0%); }
+    to    { transform: translateX(-100%); }
+  }
+
+  @-webkit-keyframes slideOutToLeft {
+    from  { -webkit-transform: translateX(0%); }
+    to    { -webkit-transform: translateX(-100%); }
+  }
+
+  // Menu Animations
+
   .animating nav.menu, .menu-visible nav.menu {
     display: block;
   }
@@ -8,7 +92,7 @@
    * If the animating class is present then apply
    * the CSS transition to #page over 250ms.
    */
-  .animating section.page-container, .animating a.toggle-menu {
+  .animating section.page-container, .animating a.button {
     transition: transform .3s ease-in-out;
     -webkit-transition: -webkit-transform .3s ease-in-out;
   }
@@ -17,7 +101,7 @@
    * If the left class is present then transform
    * the #page element 240px to the left.
    */
-  .animating.left section.page-container, .animating.left a.toggle-menu{
+  .animating.left section.page-container, .animating.left a.button {
     transform: translate3d(-@nav-mobile-menu-width, 0, 0 );
     -webkit-transform: translate3d(-@nav-mobile-menu-width, 0, 0 );
   }
@@ -26,13 +110,15 @@
    * If the right class is present then transform
    * the #page element 240px to the right.
    */
-  .animating.right section.page-container, .animating.right a.toggle-menu  {
+  .animating.right section.page-container, .animating.right a.button  {
     transform: translate3d(@nav-mobile-menu-width, 0, 0 );
     -webkit-transform: translate3d(@nav-mobile-menu-width, 0, 0 );
   }
 
 
   .animating section.page-container, nav.menu {
+    backface-visibility: hidden;
+    perspective: 1000;
     -webkit-backface-visibility: hidden;
     -webkit-perspective: 1000;
   }
@@ -41,8 +127,12 @@
     right: @nav-mobile-menu-width;
   }
 
-  .menu-visible a.toggle-menu {
+  .menu-visible a.button.right {
     right: calc(@nav-mobile-menu-width + @nav-mobile-menu-trigger-offset);
+  }
+
+  .menu-visible a.button.left {
+    left: calc(@nav-mobile-menu-trigger-offset - @nav-mobile-menu-width);
   }
 
 }

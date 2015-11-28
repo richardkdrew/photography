@@ -21,14 +21,14 @@
       <!-- endinjector -->
     <!-- endbuild -->
   </head>
-  <body>
+  <body ng-class="animation">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
     <menu></menu>
-    <section ng-view="" class="page-container"></section>
-    <a href="#" class="button toggle-menu" menu-trigger>Menu</a>
+    <section ng-view class="page-container"></section>
+    <a href="#" class="button right" trigger-button event="menu.toggle">Menu</a>
     <div class="loading-screen main" ng-show="false">
     </div>
 
@@ -53,17 +53,22 @@
           <script src="app/pictures/pictures.module.js"></script>
           <script src="app/components/menu/menu.module.js"></script>
           <script src="app/core/core.module.js"></script>
+          <script src="app/picture-detail/picture-detail.module.js"></script>
           <script src="app/app.route.js"></script>
           <script src="app/components/menu/menu.controller.js"></script>
           <script src="app/components/menu/menu.directive.js"></script>
           <script src="app/components/menu/menu.service.js"></script>
           <script src="app/core/core.data.service.js"></script>
           <script src="app/core/core.detection.service.js"></script>
+          <script src="app/core/core.navigation.service.js"></script>
+          <script src="app/picture-detail/picture-detail.controller.js"></script>
+          <script src="app/picture-detail/picture-detail.route.js"></script>
           <script src="app/pictures/pictures.controller.js"></script>
           <script src="app/pictures/pictures.route.js"></script>
           <script src="app/pictures/pictures.service.js"></script>
-          <script src="app/widgets/menu-trigger.directive.js"></script>
           <script src="app/widgets/picture-loader.directive.js"></script>
+          <script src="app/widgets/picture-loader.directive2.js"></script>
+          <script src="app/widgets/trigger-button.directive.js"></script>
           <!-- endinjector -->
         <!-- endbuild -->
 </body>
