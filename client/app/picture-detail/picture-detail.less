@@ -3,22 +3,14 @@
   width: 100%;
 }
 
-.single-picture-item {
-  .vertical-horizontal-center;
-
-  position: relative;
-  font-size: 0;
-  max-width: 800px;
-}
-
-.single-picture-item img, .picture, .single-picture-item.loading {
+.single-picture-item img, .single-picture-item img .picture, .single-picture-item.loading {
   position: relative;
   display: block;
-  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  margin: 0 auto;
 }
 
-.picture-title {
-  position: relative;
-  height: 1em;
-  margin-bottom: -1em;
+.single-picture-item, .single-picture-item.loading {
+  height: 100%;
 }

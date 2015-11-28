@@ -38,7 +38,10 @@
       // Grab the tag from the url
       vm.tag = $routeParams.tag;
 
+      console.log('loading pictures with offset: ', offset);
+
       return picturesService.getPictures(vm.tag, offset).then(function (data) {
+        console.log('getting pictures', data);
         setPictures(data);
         vm.hasMore = picturesService.hasMore();
         vm.hasSome = picturesService.hasSome();
@@ -53,6 +56,7 @@
       if (vm.tag !== picturesService.tag) {
         vm.pictures = [];
       }
+
       vm.pictures = vm.pictures.concat(pictures);
     }
 

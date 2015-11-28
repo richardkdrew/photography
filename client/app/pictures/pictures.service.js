@@ -28,16 +28,20 @@
     function getPictures(tag, offset) {
       var deferred = $q.defer();
 
+      console.log('got to pictures service with offset: ', offset);
       var pagingOffset = offset;
 
       if(offset === undefined) {
         pagingOffset = getPagingOffset();
       }
+      //var pagingOffset = offset || getPagingOffset();
       var limit = getPagingLimit();
 
+      console.log('call dataservice with offset: ', pagingOffset);
       dataService.getPictures(tag, pagingOffset, limit).then(getPicturesComplete, getPicturesFailed);
 
       function getPicturesComplete(data) {
+        console.log('got pictures', data);
         self.paging = data.meta.paging;
         self.tag = tag;
         deferred.resolve(data.pictures);
@@ -72,6 +76,7 @@
       if (detectionService.isMobile()) {
         perPage = 16;
       }
+      console.log('paging limit: ', perPage);
       return perPage;
     }
 
@@ -81,6 +86,7 @@
       if (self.paging.offset !== undefined && self.paging.limit !== undefined) {
         offset = (self.paging.offset + self.paging.limit);
       }
+      console.log('paging offset: ', offset);
       return offset;
     }
   }
