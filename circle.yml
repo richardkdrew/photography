@@ -22,6 +22,6 @@ deployment:
   staging:
     branch: develop
     commands:
-      - docker build -t richardkdrew/photography:develop-$CIRCLE_SHA1 ./dist/
+      - docker build -t richardkdrew/photography:develop ./dist/
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-      - docker push richardkdrew/photography:develop-$CIRCLE_SHA1
+      - docker push richardkdrew/photography:develop
