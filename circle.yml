@@ -13,9 +13,15 @@ dependencies:
     - grunt build
 
 deployment:
-  hub:
+  production:
     branch: master
     commands:
       - docker build -t richardkdrew/photography ./dist/
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
       - docker push richardkdrew/photography
+  staging:
+    branch: develop
+    commands:
+      - docker build -t richardkdrew/photography:develop-$CIRCLE_SHA1 ./dist/
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+      - docker push richardkdrew/photography:develop-$CIRCLE_SHA1
