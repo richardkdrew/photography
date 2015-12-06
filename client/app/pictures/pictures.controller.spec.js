@@ -1,7 +1,7 @@
 'use strict';
 
 describe('controller: pictures', function () {
-  var controller, mockPicturesService = {}, scope, routeProvider;
+  var controller, mockPicturesService = {}, mockNavigationService = {}, scope, routeProvider;
 
   beforeEach(function () {
     module('ngRoute');
@@ -29,6 +29,8 @@ describe('controller: pictures', function () {
         },
         hasMore: function () {
         },
+        isMobile: function () {
+        },
         getTag: function () {
         }
       };
@@ -40,8 +42,8 @@ describe('controller: pictures', function () {
       });
 
       /*spyOn(mockPicturesService, 'hasSome').andCallFake(function () {
-        return true;
-      });*/
+       return true;
+       });*/
 
       sinon.stub(mockPicturesService, 'hasSome', function () {
         return true;
@@ -51,14 +53,25 @@ describe('controller: pictures', function () {
         return true;
       });
 
+      sinon.stub(mockPicturesService, 'isMobile', function () {
+        return false;
+      });
+
       sinon.stub(mockPicturesService, 'getTag', function () {
         return 'testTag';
       });
 
+      // Set up the mock pictures service
+      mockNavigationService = {
+        navigate: function () {
+        }
+      };
+
       // Set up the controller under test
       controller = $controller('Pictures', {
         $scope: scope, $routeParams: {},
-        picturesService: mockPicturesService
+        picturesService: mockPicturesService,
+        navigationService: mockNavigationService
       });
       $rootScope.$apply();
     });
